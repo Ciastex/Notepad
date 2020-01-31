@@ -1,0 +1,112 @@
+﻿<atlasw:Window x:Class="Notepad.MainWindow"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:ae="http://icsharpcode.net/sharpdevelop/avalonedit"
+               xmlns:atlasc="clr-namespace:Atlas.UI.Controls;assembly=Atlas.UI"
+               xmlns:atlasw="clr-namespace:Atlas.UI.Windows;assembly=Atlas.UI"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:mx="clr-namespace:Notepad.MVVM.Markup"
+               xmlns:view="clr-namespace:Notepad.View"
+               xmlns:vm="clr-namespace:Notepad.ViewModel"
+               Title="{Binding Title}"
+               Width="800"
+               Height="450"
+               DataContext="{mx:DataContextSource vm:MainWindowViewModel}"
+               ShowCaptionBorder="True"
+               mc:Ignorable="d">
+    <atlasw:Window.CustomCaptionContent>
+        <Grid>
+            <atlasc:TextBox Width="280"
+                            Margin="0,0,128,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Placeholder="Type to search..."
+                            ShowPlaceholder="True" />
+        </Grid>
+    </atlasw:Window.CustomCaptionContent>
+    <atlasw:Window.CaptionMenu>
+        <atlasc:MenuItem Header="File">
+            <atlasc:MenuItem Header="New" />
+            <atlasc:MenuItem Header="Open" />
+            <atlasc:MenuItem Header="Save" />
+            <atlasc:MenuItem Header="Save As..." />
+            <Separator />
+            <atlasc:MenuItem Header="Print" />
+            <Separator />
+            <atlasc:MenuItem Header="Exit" />
+        </atlasc:MenuItem>
+
+        <atlasc:MenuItem Header="Edit">
+            <atlasc:MenuItem Header="Settings" />
+            <Separator />
+            <atlasc:MenuItem Header="Undo" />
+            <atlasc:MenuItem Header="Redo" />
+            <Separator />
+            <atlasc:MenuItem Header="Copy" />
+            <atlasc:MenuItem Header="Cut" />
+            <atlasc:MenuItem Header="Paste" />
+            <atlasc:MenuItem Header="Delete" />
+            <Separator />
+            <atlasc:MenuItem Header="Go to line..." />
+            <atlasc:MenuItem Header="Move line up" />
+            <atlasc:MenuItem Header="Move line down" />
+            <Separator />
+            <atlasc:MenuItem Header="Find &amp; replace" />
+            <Separator />
+            <atlasc:MenuItem Header="Insert date/time" />
+        </atlasc:MenuItem>
+        <atlasc:MenuItem Header="Format">
+            <atlasc:MenuItem Header="Word wrapping"
+                             IsCheckable="True"
+                             StaysOpenOnClick="True" />
+            <atlasc:MenuItem Header="Select font" />
+        </atlasc:MenuItem>
+
+        <atlasc:MenuItem Header="View">
+            <atlasc:MenuItem Header="Show status bar"
+                             IsCheckable="True"
+                             StaysOpenOnClick="True" />
+
+            <atlasc:MenuItem Header="Show line numbers"
+                             IsCheckable="True"
+                             IsChecked="{Binding ShowLineNumbers}"
+                             StaysOpenOnClick="True" />
+        </atlasc:MenuItem>
+
+        <atlasc:MenuItem Header="Help">
+            <atlasc:MenuItem Header="Send feedback" />
+            <atlasc:MenuItem Header="About" />
+        </atlasc:MenuItem>
+    </atlasw:Window.CaptionMenu>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="22" />
+        </Grid.RowDefinitions>
+
+        <ae:TextEditor Grid.Row="0"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       Background="#1E1E1E"
+                       FontFamily="{Binding FontFamily}"
+                       FontSize="{Binding FontSize}"
+                       Foreground="#888888"
+                       RenderOptions.BitmapScalingMode="NearestNeighbor"
+                       RenderOptions.EdgeMode="Aliased"
+                       ShowLineNumbers="{Binding ShowLineNumbers}"
+                       SnapsToDevicePixels="True">
+            <dx:Interaction.Behaviors>
+                <dx:EventToCommand Command="{Binding InitializeEditorCommand}"
+                                   EventName="Loaded"
+                                   PassEventArgsToCommand="True" />
+            </dx:Interaction.Behaviors>
+        </ae:TextEditor>
+
+        <view:EditorStatusBar Grid.Row="1"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch" />
+    </Grid>
+</atlasw:Window>
