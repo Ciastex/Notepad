@@ -18,7 +18,7 @@
                mc:Ignorable="d">
     <atlasw:Window.CustomCaptionContent>
         <Grid>
-            <atlasc:TextBox Width="280"
+            <atlasc:TextBox Width="180"
                             Margin="0,0,128,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
@@ -26,50 +26,74 @@
                             ShowPlaceholder="True" />
         </Grid>
     </atlasw:Window.CustomCaptionContent>
+
     <atlasw:Window.CaptionMenu>
         <atlasc:MenuItem Header="File">
-            <atlasc:MenuItem Header="New" />
-            <atlasc:MenuItem Header="Open" />
-            <atlasc:MenuItem Header="Save" />
-            <atlasc:MenuItem Header="Save As..." />
+            <atlasc:MenuItem Header="New"
+                             InputGestureText="Ctrl+N" />
+            <atlasc:MenuItem Header="Open"
+                             InputGestureText="Ctrl+O" />
+            <atlasc:MenuItem Header="Save"
+                             InputGestureText="Ctrl+S" />
+            <atlasc:MenuItem Header="Save As..."
+                             InputGestureText="Ctrl+Alt+S" />
             <Separator />
-            <atlasc:MenuItem Header="Print" />
+            <atlasc:MenuItem Header="Print"
+                             InputGestureText="Ctrl+P" />
             <Separator />
-            <atlasc:MenuItem Header="Exit" />
+            <atlasc:MenuItem Header="Exit"
+                             InputGestureText="Ctrl+Q" />
         </atlasc:MenuItem>
 
         <atlasc:MenuItem Header="Edit">
-            <atlasc:MenuItem Header="Settings" />
+            <atlasc:MenuItem Header="Settings"
+                             InputGestureText="Ctrl+K" />
             <Separator />
-            <atlasc:MenuItem Header="Undo" />
-            <atlasc:MenuItem Header="Redo" />
+            <atlasc:MenuItem Header="Undo"
+                             InputGestureText="Ctrl+Z" />
+            <atlasc:MenuItem Header="Redo"
+                             InputGestureText="Ctrl+Y" />
             <Separator />
-            <atlasc:MenuItem Header="Copy" />
-            <atlasc:MenuItem Header="Cut" />
-            <atlasc:MenuItem Header="Paste" />
-            <atlasc:MenuItem Header="Delete" />
+            <atlasc:MenuItem Header="Copy"
+                             InputGestureText="Ctrl+C" />
+            <atlasc:MenuItem Header="Cut"
+                             InputGestureText="Ctrl+X" />
+            <atlasc:MenuItem Header="Paste"
+                             InputGestureText="Ctrl+V" />
+            <atlasc:MenuItem Header="Delete"
+                             InputGestureText="Del" />
             <Separator />
-            <atlasc:MenuItem Header="Go to line..." />
-            <atlasc:MenuItem Header="Move line up" />
-            <atlasc:MenuItem Header="Move line down" />
+            <atlasc:MenuItem Header="Go to line..."
+                             InputGestureText="Ctrl+G" />
+            <atlasc:MenuItem Header="Move line up"
+                             InputGestureText="Alt+Up" />
+            <atlasc:MenuItem Header="Move line down"
+                             InputGestureText="Alt+Down" />
             <Separator />
-            <atlasc:MenuItem Header="Find &amp; replace" />
+            <atlasc:MenuItem Header="Find &amp; replace"
+                             InputGestureText="Ctrl+F" />
             <Separator />
-            <atlasc:MenuItem Header="Insert date/time" />
+            <atlasc:MenuItem Header="Insert date/time"
+                             InputGestureText="F5" />
         </atlasc:MenuItem>
         <atlasc:MenuItem Header="Format">
             <atlasc:MenuItem Header="Word wrapping"
+                             InputGestureText="F6"
                              IsCheckable="True"
+                             IsChecked="{Binding WrapWords}"
                              StaysOpenOnClick="True" />
-            <atlasc:MenuItem Header="Select font" />
+            <atlasc:MenuItem Header="Select font"
+                             InputGestureText="F8" />
         </atlasc:MenuItem>
 
         <atlasc:MenuItem Header="View">
             <atlasc:MenuItem Header="Show status bar"
+                             InputGestureText="F2"
                              IsCheckable="True"
                              StaysOpenOnClick="True" />
 
             <atlasc:MenuItem Header="Show line numbers"
+                             InputGestureText="F3"
                              IsCheckable="True"
                              IsChecked="{Binding ShowLineNumbers}"
                              StaysOpenOnClick="True" />
@@ -97,7 +121,8 @@
                        RenderOptions.BitmapScalingMode="NearestNeighbor"
                        RenderOptions.EdgeMode="Aliased"
                        ShowLineNumbers="{Binding ShowLineNumbers}"
-                       SnapsToDevicePixels="True">
+                       SnapsToDevicePixels="True"
+                       WordWrap="{Binding WrapWords}">
             <dx:Interaction.Behaviors>
                 <dx:EventToCommand Command="{Binding InitializeEditorCommand}"
                                    EventName="Loaded"

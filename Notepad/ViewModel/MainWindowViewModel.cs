@@ -13,6 +13,7 @@ namespace Notepad.ViewModel
 
         public string Title { get; private set; }
         public bool ShowLineNumbers { get; set; }
+        public bool WrapWords { get; set; }
 
         public Thickness EditorPadding { get; set; }
         public FontFamily FontFamily { get; set; }
@@ -39,6 +40,10 @@ namespace Notepad.ViewModel
                 new CurrentLineHighlighter(_textEditor)
             );
 
+            _textEditor.Options.ConvertTabsToSpaces = true;
+            _textEditor.Options.CutCopyWholeLine = true;
+            _textEditor.Options.IndentationSize = 2;
+
             _textEditor.TextArea.SelectionBrush = new SolidColorBrush(Color.FromRgb(43, 83, 125));
             _textEditor.TextArea.SelectionBorder = null;
             _textEditor.TextArea.SelectionCornerRadius = 0;
@@ -55,7 +60,6 @@ namespace Notepad.ViewModel
 
         private void InitializeStatusBarDefaults()
         {
-
             Messenger.Default.Send(
                 new EditorStatusBarViewModel.ChangeStatusText("Ready")
             );
